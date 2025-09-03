@@ -3,11 +3,11 @@ import { View, Image, StyleSheet, SectionList, Text, TouchableOpacity} from 'rea
 
 
 
-const TelaInicial = ({navigator}) => {
+const HomeScreen = ({navigator}) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                //Botão do menu
+                
                 <TouchableOpacity onPress={() => navigator.openDrawer()}>
                     <Image source={require('../img/menu.png')} style={styles.menu} />
                 </TouchableOpacity>
@@ -16,13 +16,28 @@ const TelaInicial = ({navigator}) => {
                 <TouchableOpacity onPress={() => navigator.navigate()}>
                     <Image source={require('../img/livro.png')} style={styles.logo} />
                 </TouchableOpacity>
+                
+                
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    
+    container: {
+        flex: 1,
+        backgroundColor: '#22272C',
+    },
+    header: {
+        backgroundColor: '2E343B',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        position: 'absolute',
+        width: '100%',
+        height: '7.5%',
+        bottom: 0,
+        gap: 20,
+    },
 });
 
-export default TelaInicial;
+export default HomeScreen;
