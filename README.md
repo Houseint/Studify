@@ -15,4 +15,6 @@ O Studify é um app de estudos com ajuda da Inteligência Artificial, onde o usu
 ```ts
 import { ScrollView, StyleSheet, Text, View} from 'react-native';
 
+Integrantes: Gustavo, Gabriel Rodrigues Melo, José Eduardo
+
 
