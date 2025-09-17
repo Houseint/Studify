@@ -1,6 +1,23 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView, SectionList } from 'react-native';
 
+const menu = [
+  {
+    title: 'Ultimos conteudos acessados',
+    icon: require('../img/Relogio-iconP.png'),
+    data: [1,2,3,4],
+  },
+  {
+    title: 'Conteudos para serem revisados',
+    icon: require('../img/Pesquisar-iconP.png'),
+    data: [1,2,3,4,5],
+  },
+  {
+    title: 'Recomendações',
+    icon: require('../img/FitaBookMark-icon.png'),
+    data: [1,2,3,4],
+  },
+];
 
 const HomeScreen = ({ navigator }) => {
   return (
@@ -14,57 +31,46 @@ const HomeScreen = ({ navigator }) => {
 
       {/* Conteúdo */}
       <View style={styles.container}>
-        <View>
-        <View style={styles.icones}>
-          <Text style={styles.title}>Últimos conteúdos acessados</Text>
-          <Image source={require('../img/Relogio-iconP.png')} style={styles.frames} />
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.row}>
-            {[...Array(4)].map((_, i) => (
-              <View key={i} style={styles.rectangle} />
-            ))}
-          </ScrollView>
-          
-        </View>
-
-        <View>
+        {/* Div para os últimos conteúdos acessados | Histórico */}
+        <SectionList
+        sections={menu} //define os dados que vão ser exibidos
+        keyExtractor={(item, index) => item + index} //gera uma chave unica para cada item, isso e pq o react native precisa identificar cada um separadamente
+        renderSectionHeader={({ section }) => (// define como cada seção vai ser exibida
+          <View style={styles.div}>
             <View style={styles.icones}>
-          <Text style={styles.title}>Conteúdos para serem revisados</Text>
-          <Image source={require('../img/Pesquisar-iconP.png')} style={styles.frames} />
+              <Text style={styles.title}>{section.title}</Text>
+              <Image source={section.icon} style={styles.frames} />
             </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.row}>
-            {[...Array(5)].map((_, i) => (
-              <View key={i} style={styles.rectangle} />
-            ))}
-          </ScrollView>
-          
-        </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.row}> // faz a barra de rolagem horizontal
+              {section.data.map((_, i) => (
+                <View key={i} style={styles.rectangle} />
+              ))}
+            </ScrollView>
+          </View>
+        )}
+        renderItem={() => null} 
+        showsVerticalScrollIndicator={false}
+      />
 
-        <View>
-        <View style={styles.icones}>
-          <Text style={styles.title}>Recomendações</Text>
-          <Image source={require('../img/FitaBookMark-icon.png')} style={styles.frames} />
-            </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.row}>
-            {[...Array(4)].map((_, i) => (
-              <View key={i} style={styles.rectangle} />
-            ))}
-          </ScrollView>
-          
-        </View>
       </View>
 
       {/* Header */}
       <View style={styles.header}>
+        {/* Botão de pesquisar */}
         <TouchableOpacity onPress={() => navigator.navigate('')}>
           <Image source={require('../img/Pesquisar-iconG.png')} style={styles.logo} />
         </TouchableOpacity>
+
+        {/* Botão de estudos com IA */}
         <TouchableOpacity onPress={() => navigator.navigate('')}>
           <Image source={require('../img/livro.png')} style={styles.logo} />
         </TouchableOpacity>
+
+        {/* Botão do histórico */}
         <TouchableOpacity onPress={() => navigator.navigate('')}>
           <Image source={require('../img/Relogio-iconG.png')} style={styles.logo} />
         </TouchableOpacity>
+        
       </View>
     </View>
   );
@@ -133,7 +139,8 @@ const styles = {
         marginRight: 10,
         gap: 10,
       },
+      div: {
+        marginTop: '15%',
+      },  
     };
-
-
 export default HomeScreen;
