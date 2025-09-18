@@ -17,4 +17,4 @@ import { ScrollView, StyleSheet, Text, View} from 'react-native';
 ```
 Integrantes: Gustavo, Gabriel Rodrigues Melo, José Eduardo
 
-
+Link Video (Gabriel): https://youtu.be/W5O-ZwsB1UQ
